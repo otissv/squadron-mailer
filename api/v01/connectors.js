@@ -1,7 +1,7 @@
 import mocks from './mocks';
 
 
-import Mailer from './mailer/mailer-connectors';
+import Mailer from './mailer/mailer-connector';
 
 
 const { mailersMock } = mocks;
@@ -9,7 +9,7 @@ const { mailersMock } = mocks;
 
 function connectors (mock) {
   return {
-    mailer    : mock ? mailersMock    : Mailer
+    mailer : mock ? mailersMock : Mailer
   };
 };
 

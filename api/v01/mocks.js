@@ -1,8 +1,8 @@
-import MailerMock from './mailer/mailer-mocks';
+import MailerMock from './mailer/mailer-mock';
 
 
 const mocks = {
-  mailerMock    : MailerMock,
+  mailerMock : MailerMock,
 };
 
 

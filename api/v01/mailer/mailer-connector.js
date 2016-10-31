@@ -1,19 +1,16 @@
 import rethinkdbdash from 'rethinkdbdash';
-import Promise from 'bluebird';
 import nodemailer from 'nodemailer';
-import { insert } from '../../../utils//utils-rethinkdb';
-import promise from '../../../utils/utils-promise';
-import ERROR from '../errors/errors';
-import { mail } from '../../../secret';
+import { insert } from '../../../../rethinkdb-utils';
+import { promise } from '../../../../squadron-utils';
+import ERROR from '../error/error';
+import { MAIL } from '../../../secret';
 import { mailerValidation } from './mailer-model';
 import R from 'ramda';
+import { env } from '../../../server/env/environment.js';
 
 
-const r = rethinkdbdash({
-  port: 28015,
-  host: 'localhost',
-  db: 'mailer'
-});
+const dbConfig = env().rethinkdb;
+const r = rethinkdbdash(dbConfig);
 
 const TABLE = 'mail';
 
@@ -121,14 +118,8 @@ export default class Mailer {
 
 
   send ({ args, persist }) {
+
     return promise((resolve, reject) => {
-      const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: mail.user, // Your email id
-          pass: mail.password // Your password
-        }
-      });
 
       const mailOptions = ({
         date   : args.date,
@@ -140,19 +131,12 @@ export default class Mailer {
         to     : args.to
       });
 
-      const sendMail = (resolve, reject) => {
-
-      }
-
       if (!mailerValidation(mailOptions).valid) return reject('Not valid mail');
-
 
       if (persist) {
         function callback (resolve) {
           return R.curry((response) => {
             if (response.errors) return response.errors;
-            console.log(response);
-            console.log('Mailers mocks save to rethinkdb');
           });
         }
 
@@ -170,6 +154,7 @@ export default class Mailer {
           console.log(error);
           return reject(error);
         }
+        console.log(info);
         return resolve(mailOptions);
       });
     });

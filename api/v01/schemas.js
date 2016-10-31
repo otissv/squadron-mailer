@@ -1,4 +1,4 @@
-import  mailer, { mailerQueries, mailerMutations } from './mailer/mailer-schemas';
+import  mailer, { mailerQueries, mailerMutations } from './mailer/mailer-schema';
 
 
 const typeDefinitions = `

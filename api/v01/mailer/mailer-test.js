@@ -2,8 +2,8 @@
 
 import test from 'tape';
 import env from '../../../server/env/development-env';
-import fetch from '../../../utils/utils-fetch-test';
-import { mailersMock } from './mailer-mocks';
+import { fetch } from '../../../../squadron-utils';
+import { mailersMock } from './mailer-mock';
 
 const API_URL = `${env.baseURL}/v01/graphql`;
 
@@ -16,7 +16,15 @@ test('Mailer controller', nested => {
       query:`
       {
         ${method} {
-
+          id
+          date
+          from
+          service
+          subject
+          html
+          text
+          to
+          date
         }
       }`
     };
@@ -268,6 +276,7 @@ test('Mailer controller', nested => {
       url   : API_URL,
       data: query,
       assert: (response) => {
+        console.log(response.data);
         const actaul = response.data[method];
         const expect = {
           "date": "2016-09-07T20:26:41.925Z",

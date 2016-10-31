@@ -2,16 +2,14 @@
 
 import R from 'ramda';
 import rethinkdbdash from 'rethinkdbdash';
-import { insert } from '../../../utils/utils-rethinkdb';
-import { mailersMock } from './mailer-mocks';
+import { insert } from '../../../../rethinkdb-utils';
+import { mailersMock } from './mailer-mock';
+import development from '../../../server/env/development-env';
 
 const TABLE = 'mail';
+const dbConfig = development.rethinkdb;
+const r = rethinkdbdash(dbConfig);
 
-const r = rethinkdbdash({
-  port: 28015,
-  host: 'localhost',
-  db: 'mailer'
-});
 
 function insertMock () {
   function callback (resolve) {
