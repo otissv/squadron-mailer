@@ -6,9 +6,9 @@
 'use strict';
 
 import { apolloServer } from 'apollo-server';
-import schema from './schemas';
-import resolvers from './resolvers';
-import connectors from './connectors';
+import schema from './v01-mailer-schemas';
+import resolvers from './v01-mailer-resolvers';
+import connectors from './v01-mailer-connectors';
 import ERROR from './error/error';
 
 

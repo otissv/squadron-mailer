@@ -1,4 +1,4 @@
-import mocks from './mocks';
+import mocks from './v01-mailer-mocks';
 
 
 import Mailer from './mailer/mailer-connector';

@@ -3,7 +3,7 @@
 */
 
 'use strict';
-import v01Routes from '../api/v01/mailer-v01-routes';
+import v01Routes from '../api/v01/v01-mailer-routes';
 
 
 export default function routes (app, context) {
